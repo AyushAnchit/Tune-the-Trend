@@ -573,7 +573,7 @@ export default function App() {
                             </span>
                             <span className="text-xs text-[#00f0ff] font-bold tracking-wider">MP3 STREAM</span>
                           </div>
-                          <audio controls src={previewUrl} className="w-full h-10 rounded-none accent-[#00f0ff]" />
+                          <audio controls preload="metadata" src={previewUrl} className="w-full h-10 rounded-none accent-[#00f0ff]" />
                         </div>
                       ) : (
                         <div className="p-4 bg-black/80 border border-slate-800 text-xs md:text-sm font-mono-tech text-slate-400 flex items-center justify-between">
@@ -665,14 +665,73 @@ export default function App() {
   );
 }
 
-// Fallback Mock Recommendations Client-Side Function
+// Fallback Mock Recommendations Client-Side Function (Used when Backend is Offline)
 function getMockCyberpunkRecommendations(niche: string, music: string): Recommendation[] {
-  return [
-    {
-      rank: 1,
+  const musicLower = (music || '').toLowerCase();
+  const nicheLower = (niche || '').toLowerCase();
+
+  let topTrack = {
+    track: "Cyberpunk Midnight Synth",
+    artist: "Neon Syndicate",
+    trend_name: "80s Retro Synthwave & Tech Launch Visuals",
+    genres: ["synthwave", "retrowave", "electronic"],
+    preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    why: `Direct match for ${nicheLower || 'tech'} concept with requested ${musicLower || 'synthwave'} audio texture. High-retention cyberpunk momentum.`
+  };
+
+  if (musicLower.includes('flamenco') || (nicheLower.includes('travel') && !musicLower.includes('synth'))) {
+    topTrack = {
       track: "Spanish Flamenco Guitar",
       artist: "Spanish Acoustic Ensemble",
       trend_name: "Solo Travel Spain & Scenic Flamenco Reel",
+      genres: ["flamenco", "acoustic", "latin"],
+      preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      why: `Authentic acoustic flamenco texture perfectly matching ${nicheLower || 'travel'} concept.`
+    };
+  } else if (musicLower.includes('sitar') || musicLower.includes('bollywood')) {
+    topTrack = {
+      track: "Kathak Sitar Fusion",
+      artist: "Indian Classical Ensemble",
+      trend_name: "Indian Classical Kathak & Sitar Fusion Reel",
+      genres: ["sitar", "classical", "fusion"],
+      preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      why: `Traditional sitar rhythm and fusion beat ideal for ${nicheLower} content.`
+    };
+  } else if (musicLower.includes('violin') || musicLower.includes('calm')) {
+    topTrack = {
+      track: "Calm Solitude Arr. For Violin",
+      artist: "Dream Presence",
+      trend_name: "Morning Routine Focus & Deep Work",
+      genres: ["violin", "ambient", "calm"],
+      preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+      why: `Soothing acoustic violin strings engineered for focus and high retention.`
+    };
+  } else if (musicLower.includes('lofi') || musicLower.includes('study')) {
+    topTrack = {
+      track: "Lofi Study Beats 2026",
+      artist: "ChillHop Cyber Cafe",
+      trend_name: "Late Night Coding & Study Aesthetics",
+      genres: ["lofi", "chillhop", "ambient"],
+      preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+      why: `Relaxing chillhop groove tailored for ${nicheLower} visuals.`
+    };
+  } else if (musicLower.includes('hip hop') || musicLower.includes('cyber')) {
+    topTrack = {
+      track: "Cyber Trap Odyssey",
+      artist: "Glitch Vector",
+      trend_name: "Futuristic Urban Cyber Hip Hop",
+      genres: ["hip hop", "cyberpunk", "trap"],
+      preview: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      why: `Heavy bass cyber trap beat driving engagement for ${nicheLower} videos.`
+    };
+  }
+
+  return [
+    {
+      rank: 1,
+      track: topTrack.track,
+      artist: topTrack.artist,
+      trend_name: topTrack.trend_name,
       platform: "instagram",
       content_type: "reels",
       creator_match_score: 0.94,
@@ -680,9 +739,9 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
       p_virality_potential: 0.88,
       p_concept_relevance: 0.98,
       virality_tier: "Explosive Growth",
-      why_it_matches: `Direct match for ${niche} video concept with requested ${music} audio texture. Provides authentic high-retention atmosphere.`,
+      why_it_matches: topTrack.why,
       why_now: "Currently in peak freshness window with active public signals.",
-      source_url: "https://later.com/blog/instagram-reels-trends/travel-spain",
+      source_url: "https://later.com/blog/instagram-reels-trends",
       evidence_confidence: 0.92,
       candidate: {
         trend_signal: {
@@ -692,19 +751,19 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2539912471",
-          preview_url: "https://cdnt-preview.dzcdn.net/preview/b22037704.mp3",
-          genres: [music || "acoustic", "flamenco"],
-          energy: 0.45,
-          tempo: 84,
-          valence: 0.65
+          preview_url: topTrack.preview,
+          genres: topTrack.genres,
+          energy: 0.75,
+          tempo: 118,
+          valence: 0.70
         }
       }
     },
     {
       rank: 2,
-      track: "Kathak Sitar Fusion",
-      artist: "Indian Classical Ensemble",
-      trend_name: "Indian Classical Kathak & Sitar Fusion Reel",
+      track: musicLower.includes('synth') || musicLower.includes('retro') ? "Synthwave Cyber Run" : "Kathak Sitar Fusion",
+      artist: musicLower.includes('synth') || musicLower.includes('retro') ? "RetroDrive 1984" : "Indian Classical Ensemble",
+      trend_name: musicLower.includes('synth') || musicLower.includes('retro') ? "Neon Synthwave Trend" : "Indian Classical Kathak Reel",
       platform: "instagram",
       content_type: "reels",
       creator_match_score: 0.91,
@@ -712,9 +771,9 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
       p_virality_potential: 0.85,
       p_concept_relevance: 0.95,
       virality_tier: "High Momentum",
-      why_it_matches: "Near-perfect match for requested traditional acoustic rhythm and graceful choreography.",
+      why_it_matches: `High energy ${musicLower || 'retro'} rhythm matching creator parameters.`,
       why_now: "High retention across short video platforms.",
-      source_url: "https://later.com/blog/instagram-reels-trends/indian-classical-dance",
+      source_url: "https://later.com/blog/instagram-reels-trends",
       evidence_confidence: 0.88,
       candidate: {
         trend_signal: {
@@ -724,11 +783,11 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2539912451",
-          preview_url: "https://cdnt-preview.dzcdn.net/preview/a11022440.mp3",
-          genres: ["classical", "fusion"],
-          energy: 0.40,
-          tempo: 78,
-          valence: 0.50
+          preview_url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+          genres: [musicLower || "synthwave", "retro"],
+          energy: 0.80,
+          tempo: 124,
+          valence: 0.60
         }
       }
     },
@@ -756,7 +815,7 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2124843607",
-          preview_url: "https://cdnt-preview.dzcdn.net/preview/c33044550.mp3",
+          preview_url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
           genres: ["violin", "calm", "study"],
           energy: 0.22,
           tempo: 62,
@@ -788,7 +847,7 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2801558052",
-          preview_url: "https://cdnt-preview.dzcdn.net/preview/d44055660.mp3",
+          preview_url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
           genres: ["pop", "viral"],
           energy: 0.70,
           tempo: 110,
@@ -820,7 +879,7 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2833834772",
-          preview_url: "https://cdnt-preview.dzcdn.net/preview/e55066770.mp3",
+          preview_url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
           genres: ["indie", "pop"],
           energy: 0.78,
           tempo: 120,
