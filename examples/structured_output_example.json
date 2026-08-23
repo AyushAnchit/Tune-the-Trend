@@ -1,0 +1,73 @@
+{
+  "request_id": "req_88f91a42",
+  "niche": "solo trip to spain",
+  "music_genre": "flamenco guitar",
+  "total_candidates_retrieved": 15,
+  "top_k_reranked": 3,
+  "recommendations": [
+    {
+      "rank": 1,
+      "track": "Spanish Flamenco Guitar",
+      "artist": "Spanish Acoustic Ensemble",
+      "trend_name": "Solo Travel Spain & Scenic Flamenco Reel",
+      "platform": "instagram",
+      "content_type": "reels",
+      "creator_match_score": 0.94,
+      "p_music_similarity": 0.96,
+      "p_virality_potential": 0.88,
+      "p_concept_relevance": 0.98,
+      "virality_tier": "Explosive Growth",
+      "why_it_matches": "Direct match for travel video concept with requested acoustic flamenco guitar audio texture. Provides authentic high-retention atmosphere.",
+      "why_now": "Currently in peak freshness window with active public signals on Instagram Reels.",
+      "source_url": "https://later.com/blog/instagram-reels-trends/travel-spain",
+      "evidence_confidence": 0.92,
+      "candidate": {
+        "trend_signal": {
+          "source_id": "later_instagram",
+          "platform": "instagram",
+          "scraped_at": "2026-08-23T18:00:00Z"
+        },
+        "music_evidence": {
+          "spotify_url": "https://www.deezer.com/track/2539912471",
+          "preview_url": "https://cdnt-preview.dzcdn.net/preview/b22037704.mp3",
+          "genres": ["flamenco", "acoustic", "guitar"],
+          "energy": 0.45,
+          "tempo": 84,
+          "valence": 0.70
+        }
+      }
+    },
+    {
+      "rank": 2,
+      "track": "Die With A Smile",
+      "artist": "Lady Gaga & Bruno Mars",
+      "trend_name": "Shazam Top 200 Chart Trending Sound",
+      "platform": "cross_platform",
+      "content_type": "reels",
+      "creator_match_score": 0.82,
+      "p_music_similarity": 0.75,
+      "p_virality_potential": 0.95,
+      "p_concept_relevance": 0.80,
+      "virality_tier": "Explosive Growth",
+      "why_it_matches": "#1 Trending sound on Shazam Top 200 with 1.2M Shazams across social platforms.",
+      "why_now": "Explosive viral growth across all creator video profiles.",
+      "source_url": "https://www.shazam.com/charts/top-200/united-states",
+      "evidence_confidence": 0.95,
+      "candidate": {
+        "trend_signal": {
+          "source_id": "shazam_charts",
+          "platform": "cross_platform",
+          "scraped_at": "2026-08-23T18:00:00Z"
+        },
+        "music_evidence": {
+          "spotify_url": "https://www.deezer.com/track/2801558052",
+          "preview_url": "https://cdnt-preview.dzcdn.net/preview/d44055660.mp3",
+          "genres": ["pop", "viral"],
+          "energy": 0.70,
+          "tempo": 110,
+          "valence": 0.75
+        }
+      }
+    }
+  ]
+}
