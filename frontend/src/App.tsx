@@ -188,6 +188,8 @@ export default function App() {
       content_description: description,
     };
 
+    let loadedRecs: Recommendation[] | null = null;
+
     try {
       const res = await fetch('/api/recommend', {
         method: 'POST',
@@ -195,25 +197,32 @@ export default function App() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
+      const resContentType = res.headers.get('content-type') || '';
+
+      if (res.ok && resContentType.includes('application/json')) {
+        loadedRecs = await res.json();
+      } else {
+        // Try local API fallback
         const directRes = await fetch('http://localhost:8080/recommend', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        if (!directRes.ok) throw new Error(`HTTP Error ${directRes.status}`);
-        const data = await directRes.json();
-        setRecommendations(data);
-      } else {
-        const data = await res.json();
-        setRecommendations(data);
+        const directContentType = directRes.headers.get('content-type') || '';
+        if (directRes.ok && directContentType.includes('application/json')) {
+          loadedRecs = await directRes.json();
+        } else {
+          throw new Error('Backend API unavailable or invalid content type');
+        }
       }
     } catch (err: any) {
       console.warn("Backend API call failed, running Cyberpunk client synthesis", err);
-      setTimeout(() => {
-        setRecommendations(getMockCyberpunkRecommendations(niche, desiredMusic));
-      }, 600);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      loadedRecs = getMockCyberpunkRecommendations(niche, desiredMusic);
     } finally {
+      if (loadedRecs) {
+        setRecommendations(sanitizePreviewUrls(loadedRecs, niche, desiredMusic));
+      }
       setLoading(false);
     }
   };
@@ -665,6 +674,43 @@ export default function App() {
   );
 }
 
+function getAudioFallback(textHint: string): string {
+  const g = (textHint || '').toLowerCase();
+  if (g.includes('flamenco') || g.includes('spanish') || g.includes('guitar')) return '/audio/flamenco.mp3';
+  if (g.includes('sitar') || g.includes('bollywood') || g.includes('indian') || g.includes('kathak')) return '/audio/sitar.mp3';
+  if (g.includes('violin') || g.includes('classical') || g.includes('calm') || g.includes('solitude')) return '/audio/violin.mp3';
+  if (g.includes('lofi') || g.includes('chill') || g.includes('study') || g.includes('ambient')) return '/audio/lofi.mp3';
+  return '/audio/synthwave.mp3';
+}
+
+function sanitizePreviewUrls(recs: Recommendation[], niche: string, desiredMusic: string): Recommendation[] {
+  const localAudioList = [
+    '/audio/synthwave.mp3',
+    '/audio/flamenco.mp3',
+    '/audio/sitar.mp3',
+    '/audio/violin.mp3',
+    '/audio/lofi.mp3'
+  ];
+
+  return recs.map((rec, index) => {
+    let pUrl = rec.candidate?.music_evidence?.preview_url;
+    if (!pUrl || pUrl.includes('p.scdn.co')) {
+      const hint = `${rec.track} ${rec.artist} ${rec.trend_name} ${desiredMusic} ${niche}`;
+      pUrl = getAudioFallback(hint) || localAudioList[index % localAudioList.length];
+    }
+    return {
+      ...rec,
+      candidate: {
+        ...rec.candidate,
+        music_evidence: {
+          ...rec.candidate?.music_evidence,
+          preview_url: pUrl
+        }
+      }
+    };
+  });
+}
+
 // Fallback Mock Recommendations Client-Side Function (Used when Backend is Offline)
 function getMockCyberpunkRecommendations(niche: string, music: string): Recommendation[] {
   const musicLower = (music || '').toLowerCase();
@@ -783,7 +829,7 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2539912451",
-          preview_url: "/audio/flamenco.mp3",
+          preview_url: musicLower.includes('synth') || musicLower.includes('retro') ? "/audio/synthwave.mp3" : "/audio/sitar.mp3",
           genres: [musicLower || "synthwave", "retro"],
           energy: 0.80,
           tempo: 124,
@@ -815,7 +861,7 @@ function getMockCyberpunkRecommendations(niche: string, music: string): Recommen
         },
         music_evidence: {
           spotify_url: "https://www.deezer.com/track/2124843607",
-          preview_url: "/audio/sitar.mp3",
+          preview_url: "/audio/violin.mp3",
           genres: ["violin", "calm", "study"],
           energy: 0.22,
           tempo: 62,
