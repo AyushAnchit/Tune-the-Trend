@@ -6,6 +6,17 @@ venv/
 ENV/
 env/
 
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+tune_the_trend.db
+
+# Large raw media files in root
+WhatsApp Video*.mp4
+image.png
+frontend/public/cyberpunk_footer.mp4
+
 # Python cache & build
 __pycache__/
 *.py[cod]
