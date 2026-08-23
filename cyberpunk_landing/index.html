@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TUNE THE TREND // CYBERPUNK AUDIO RECON ENGINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- CRT Scanline Overlay -->
+  <div class="scanlines"></div>
+
+  <!-- Header / HUD Navbar -->
+  <header class="hud-header">
+    <div class="header-content">
+      <div class="brand">
+        <span class="logo-text">TUNE_THE_TREND<span class="pink-accent">//</span>RECON</span>
+        <span class="badge-v2">v2.0_ONLINE</span>
+      </div>
+      <div class="hud-status">
+        <span class="blink-warning">⚠️ SYSTEM_STATUS: PORT 8080 CONNECTED</span>
+        <span class="cyan-accent">[ 6_SOURCES_INGESTED ]</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="container">
+    <section class="hero-section">
+      <div class="tech-tag">[ // SYSTEM_READY // PROBABILISTIC_INFERENCE_ACTIVE ]</div>
+      <h1 class="hero-title">VIRAL AUDIO RECON <span class="cyan-glow">&amp; TREND SYNTHESIS</span></h1>
+      <p class="hero-subtitle">High-tech audio intelligence engine parsing creator video profiles against real-time Shazam, Hype Machine, and social media signals with 30s live stream previews.</p>
+    </section>
+
+    <!-- Main Grid Matrix -->
+    <div class="cyber-grid">
+      <!-- Input Panel -->
+      <div class="cyber-card input-card">
+        <div class="card-corner-tag">// INPUT_MATRIX [ 01 ]</div>
+        <h2 class="card-title">CREATOR_REQUIREMENTS</h2>
+        
+        <form id="recon-form">
+          <div class="form-group">
+            <label class="field-label">// FORMAT &amp; PLATFORM</label>
+            <div class="pill-group">
+              <button type="button" class="pill-btn active">REELS</button>
+              <button type="button" class="pill-btn">TIKTOK</button>
+              <button type="button" class="pill-btn">SHORTS</button>
+              <button type="button" class="pill-btn">VIDEO</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">// SELECT_CREATOR_NICHE</label>
+            <div class="tag-cloud">
+              <span class="tag active">travel</span>
+              <span class="tag">dance</span>
+              <span class="tag">fashion</span>
+              <span class="tag">fitness</span>
+              <span class="tag">cooking</span>
+              <span class="tag">tech</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">// DESIRED_AUDIO_STYLE</label>
+            <input type="text" class="cyber-input" value="spanish, flamenco" placeholder="e.g. spanish, flamenco, violin, calm" />
+          </div>
+
+          <div class="form-group">
+            <label class="field-label">// PROJECT_DESCRIPTION (OPTIONAL)</label>
+            <textarea class="cyber-textarea" rows="3" placeholder="Describe video concept...">solo trip to spain</textarea>
+          </div>
+
+          <button type="button" class="btn-cyan glitch-hover">EXECUTE_RECON_SEARCH ⚡</button>
+        </form>
+      </div>
+
+      <!-- Output Panel -->
+      <div class="cyber-card output-card">
+        <div class="card-corner-tag">// SYNTHESIZED_OUTPUT [ 02 ]</div>
+        <h2 class="card-title">TOP_5_RECOMMENDATIONS</h2>
+
+        <!-- Card Sample 1 -->
+        <div class="recommendation-item">
+          <div class="rec-header">
+            <span class="rank-badge">#1</span>
+            <div class="rec-title-wrap">
+              <h3 class="rec-track">Spanish Flamenco Guitar</h3>
+              <span class="rec-artist">ARTIST: Spanish Acoustic Ensemble</span>
+            </div>
+            <div class="rec-score">
+              <span class="score-num">94%</span>
+              <span class="score-label">MATCH</span>
+            </div>
+          </div>
+
+          <div class="audio-player-box">
+            <div class="audio-label">▶️ 30s LIVE AUDIO PREVIEW <span class="yellow-accent">MP3_STREAM</span></div>
+            <audio controls class="cyber-audio-player">
+              <source src="https://cdnt-preview.dzcdn.net/preview/b22037704.mp3" type="audio/mp3">
+            </audio>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="m-label">CONCEPT_RELEVANCE</span>
+              <span class="m-val">98%</span>
+            </div>
+            <div class="metric-box">
+              <span class="m-label cyan-accent">AUDIO_SIMILARITY</span>
+              <span class="m-val cyan-accent">96%</span>
+            </div>
+            <div class="metric-box">
+              <span class="m-label yellow-accent">VIRALITY_MOMENTUM</span>
+              <span class="m-val yellow-accent">88%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

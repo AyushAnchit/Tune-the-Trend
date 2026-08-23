@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #000000;
+    color: #F8FAFC;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-cyber {
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+  }
+
+  .font-mono-tech {
+    font-family: 'Share Tech Mono', monospace;
+  }
+}
+
+/* Cursor-Following Wavy & Morphing Supernova (Red + Blue + Purple Tint) */
+@keyframes supernova-wavy-morph {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    border-radius: 42% 58% 65% 35% / 55% 38% 62% 45%;
+    opacity: 0.85;
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(90deg);
+    border-radius: 60% 40% 30% 70% / 40% 65% 35% 60%;
+    opacity: 0.95;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.30) rotate(180deg);
+    border-radius: 35% 65% 55% 45% / 60% 45% 55% 40%;
+    opacity: 0.90;
+  }
+  75% {
+    transform: translate(-50%, -50%) scale(1.10) rotate(270deg);
+    border-radius: 65% 35% 45% 55% / 45% 55% 45% 55%;
+    opacity: 0.95;
+  }
+}
+
+.supernova-cursor-core {
+  position: fixed;
+  width: 480px;
+  height: 480px;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(168, 85, 247, 0.90) 18%,
+    rgba(255, 0, 85, 0.85) 38%,
+    rgba(0, 240, 255, 0.70) 58%,
+    rgba(139, 92, 246, 0.40) 78%,
+    transparent 88%
+  );
+  filter: blur(55px);
+  transition: width 0.3s ease, height 0.3s ease, filter 0.3s ease;
+  animation: supernova-wavy-morph 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.cyber-cursor-hover .supernova-cursor-core {
+  width: 580px;
+  height: 580px;
+  filter: blur(45px);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(168, 85, 247, 0.95) 20%,
+    rgba(255, 0, 85, 0.90) 40%,
+    rgba(0, 240, 255, 0.80) 62%,
+    rgba(139, 92, 246, 0.50) 80%,
+    transparent 90%
+  );
+}
+
+/* Deep Space Vignette for Darker Background */
+.dark-space-vignette {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.75) 60%,
+    rgba(0, 0, 0, 0.96) 100%
+  );
+  pointer-events: none;
+}
+
+/* Slow Waving Red & Blue Aurora Background Animation */
+@keyframes aurora-wave-red {
+  0%, 100% {
+    transform: translate(-10%, -10%) scale(1) rotate(0deg);
+    opacity: 0.45;
+  }
+  33% {
+    transform: translate(15%, 20%) scale(1.2) rotate(45deg);
+    opacity: 0.58;
+  }
+  66% {
+    transform: translate(-15%, 25%) scale(0.9) rotate(-30deg);
+    opacity: 0.38;
+  }
+}
+
+@keyframes aurora-wave-blue {
+  0%, 100% {
+    transform: translate(10%, 15%) scale(1) rotate(0deg);
+    opacity: 0.45;
+  }
+  33% {
+    transform: translate(-20%, -15%) scale(1.15) rotate(-45deg);
+    opacity: 0.58;
+  }
+  66% {
+    transform: translate(15%, -10%) scale(0.85) rotate(-30deg);
+    opacity: 0.38;
+  }
+}
+
+.aurora-red-glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 85, 0.48) 0%,
+    rgba(225, 29, 72, 0.28) 45%,
+    transparent 75%
+  );
+  animation: aurora-wave-red 18s ease-in-out infinite;
+}
+
+.aurora-blue-glow {
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 240, 255, 0.48) 0%,
+    rgba(37, 99, 235, 0.28) 45%,
+    transparent 75%
+  );
+  animation: aurora-wave-blue 22s ease-in-out infinite;
+}
+
+/* Custom Reactive Cyber Cursor Follower Ring */
+.cyber-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00f0ff;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+  transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+}
+
+.cyber-cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 240, 255, 0.6);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              height 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              border-color 0.2s ease, 
+              background-color 0.2s ease;
+}
+
+/* Expanded state when hovering over interactive elements */
+.cyber-cursor-hover .cyber-cursor-ring {
+  width: 48px;
+  height: 48px;
+  border-color: #ff0055;
+  background-color: rgba(255, 0, 85, 0.08);
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+}
+
+.cyber-cursor-hover .cyber-cursor-dot {
+  background-color: #ff0055;
+  box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+}
+
+/* Interactive Component Hover Lift & Click Ripple */
+.cyber-hover-lift {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.25s ease, 
+              border-color 0.25s ease, 
+              background-color 0.25s ease;
+}
+
+.cyber-hover-lift:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.15);
+  border-color: rgba(0, 240, 255, 0.8);
+}
+
+.cyber-hover-lift:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.cyber-hover-pink {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.25s ease, 
+              border-color 0.25s ease;
+}
+
+.cyber-hover-pink:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.4), inset 0 0 10px rgba(255, 0, 85, 0.15);
+  border-color: #ff0055;
+}
+
+.cyber-hover-pink:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Cyberpunk CRT Scanline Effect */
+.scanline-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Neon Glow Shadow Utilities */
+.neon-glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.neon-glow-pink {
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.4), inset 0 0 10px rgba(255, 0, 85, 0.1);
+}
+
+.neon-glow-yellow {
+  box-shadow: 0 0 15px rgba(255, 251, 0, 0.4), inset 0 0 10px rgba(255, 251, 0, 0.1);
+}
+
+.neon-text-cyan {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.neon-text-pink {
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.8), 0 0 20px rgba(255, 0, 85, 0.4);
+}
+
+.neon-text-yellow {
+  text-shadow: 0 0 8px rgba(255, 251, 0, 0.8), 0 0 20px rgba(255, 251, 0, 0.4);
+}
+
+/* Sharp Cyber Corner Clip Path */
+.cyber-cut-corner {
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 14px) 0, 
+    100% 14px, 
+    100% 100%, 
+    14px 100%, 
+    0 calc(100% - 14px)
+  );
+}
+
+.cyber-cut-corner-lg {
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 24px) 0, 
+    100% 24px, 
+    100% 100%, 
+    24px 100%, 
+    0 calc(100% - 24px)
+  );
+}
+
+/* Calm Cyberpunk Smooth Glow & Elevate Hover */
+.cyber-button-cyan {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cyber-button-cyan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px 4px rgba(0, 240, 255, 0.75);
+}
+
+.cyber-button-pink {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cyber-button-pink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px 4px rgba(255, 0, 85, 0.75);
+}
+
+/* Blinking Tech Alert Indicator */
+@keyframes tech-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.tech-blink {
+  animation: tech-blink 1.2s infinite ease-in-out;
+}
+
+/* Background Ambient Blurred Soundwave Equalizer */
+@keyframes soundwave-bar-pulse {
+  0%, 100% {
+    transform: scaleY(0.25);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.55;
+  }
+}
+
+.bg-soundwave-container {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  height: 280px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw;
+  filter: blur(16px);
+  opacity: 0.35;
+}
+
+.bg-soundwave-bar {
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(255, 0, 85, 0.8) 0%, rgba(0, 240, 255, 0.9) 50%, rgba(139, 92, 246, 0.8) 100%);
+  border-radius: 999px;
+  transform-origin: center;
+  animation: soundwave-bar-pulse 4s ease-in-out infinite;
+}
+
+
